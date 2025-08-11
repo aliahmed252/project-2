@@ -1,0 +1,16 @@
+- name: Example of Handlers
+  hosts: localhost
+  become: yes
+
+  tasks:
+    - name: Copy Nginx config file
+      copy:
+        src: /home/aliahmed/project-2/handler
+        dest: /etc/nginx/nginx.conf
+      notify: Restart Nginx      
+
+  handlers:
+    - name: Restart Nginx
+      service:
+        name: httpd
+        state: restarted
